@@ -16,6 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download installers from latest release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          $tag = gh release list -R ${{ github.repository }} --limit 1 --json tagName --jq '.[0].tagName'
+          gh release download $tag -R ${{ github.repository }} -p "*.exe" -D dist
+          Get-ChildItem dist
+
       - name: Azure Login
         uses: azure/login@v2
         with:
