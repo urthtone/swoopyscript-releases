@@ -29,7 +29,7 @@ jobs:
           endpoint: https://eus.codesigning.azure.net
           signing-account-name: jamesdancersigning
           certificate-profile-name: SwoopyScript
-          files-folder: ${{ github.workspace }}\your-build-output-folder
+          files-folder: ${{ github.workspace }}\dist
           files-folder-filter: exe,dll,msi
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
